@@ -1,0 +1,209 @@
+
+/**
+ * 默认样式
+ */
+$navheight: 80px;
+$fontSize:26px;
+$mainColor:#fff;
+$fontColor : #3d3d3d;
+$expend_fontColor:#3d3d3d;
+$expend_bgColor:rgba(255, 255, 255, .9);
+$activeColor:#eb3033;
+$expand_activeColor:#eb3033;
+
+
+%arrow {
+    background: $fontColor;
+    border-radius: 6px;
+    position: absolute;
+    transition: all 0.4s;
+    content: "";
+}
+.sticky-nav-container{
+    position: relative;
+    z-index: 1000;
+}
+.hide-stickynav {
+    height: 0;
+    overflow: hidden;
+}
+.sticky-nav {
+
+    height: $navheight;
+    line-height: $navheight;
+    background: $mainColor;
+    
+    .scroll-view{
+        overflow-x: scroll;
+        white-space: nowrap;
+        min-width: 100%;
+        //scroll-behavior: smooth;
+    }
+
+    .sticky-nav-ul {
+       
+        width: 100%;
+      
+        white-space: nowrap; 
+    }
+
+    .sticky-nav-item {
+        position: relative;
+        // display: flex;
+        display: inline-block;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        flex-grow: 1;
+        color: $fontColor;
+        padding: 0 15px;
+        padding-left: 30px;
+        margin-left: 10px;
+        font-size: $fontSize;
+
+        &.active {
+            color: $activeColor;
+            font-weight: bold;
+
+            &:before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 5px;
+                display: block;
+                width: 18px;
+                height: 25px;
+                transform: translateY(-50%);
+                background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAZCAYAAAA8CX6UAAABi0lEQVQ4jZXUv0tVcRjH8ZdH3RoVhOQO7UEkpENk0eL9C4LKGivoDzCQaHAoqL1Gl1rdjO6QIQ4GkeDU4BK45NLqDdLhPkfOvT3fm/cDX87h+Xye9/f8eM4ZO7oyJ9Ei7uI2WujiJ7bxHl8GG8YGQC28w1JGb+gjHgUcVA1zDrvngIjMbvT0gVrYxMw5ILVmoqfVBL3F9AiQWtPRawILaBeCX2NXkbmWZNpYqLBcgDzDPF7EmsdKIbtc4XpifMLLpP4qvEHdqHAxMT4Udi55lypcSIzfQ0CZN17hIDHScQ9dTWoHlfyeH2M2qc/iSVLvVFhPjCls6U3weKx21KaS/Hr9rX3GzSQAf+I4WfC3cKue7OeFUA0oQc56a9A2NoaES9qI3r6vfwXHI0CONSa9CfqBtRFAa9GDf39sk/iGy/+B7OvNWv0i+q5IGA/0fq0ldfGwCclAsIfVIaBVfB8sZiB4g05S7+B11lAC/cV9HDZqh7iHk1FA8At39J5JN86PSuGJISDYwdPGeVGnOhxMGUmreiEAAAAASUVORK5CYII=) no-repeat;
+                background-size: contain;
+            }
+        }
+
+
+    }
+}
+
+.stickyNav-expand {
+    background: $mainColor;
+    height: $navheight;
+    box-shadow: -1px 0 1px 0 rgba(0, 0, 0, .1);
+    position: absolute;
+    width: 75px;
+    right: 0;
+    top: 0px;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateZ(0);
+
+}
+
+
+.sticky-nav-arrow {
+    $width: 40px;
+    width: $width;
+    height: 30px;
+    display: block;
+    position: relative;
+
+    &:before,
+    &:after {
+        width: $width/2;
+        height: 6px;
+        @extend %arrow;
+    }
+
+    &:before {
+        transform: translateY(20px) rotate(40deg);
+        transform-origin: 100% 0;
+        right: 42%;
+    }
+
+    &:after {
+        transform: translateY(20px) rotate(-40deg);
+        transform-origin: 0 0;
+        left: 42%;
+    }
+    &.expand {
+         &:before {
+             transform: translateY(5px) rotate(-40deg);
+             transform-origin: 100% 100%;
+         }
+
+         &:after {
+             transform: translateY(5px) rotate(40deg);
+             transform-origin: 0 100%;
+
+         }
+     }
+}
+
+
+
+.stickyNav-overlay {
+    background: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+    height: 100%;
+    display: none;
+    z-index: 999;
+}
+
+.sticky-nav-expand-topbar {
+    height: $navheight;
+    line-height: $navheight;
+    text-indent: 20px;
+    font-size: $fontSize;
+    background: $mainColor;
+    color: $fontColor;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    transform: translateZ(0);
+}
+
+.sticky-nav-expand-panel {
+
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px 10px;
+    left: 0;
+    top: $navheight;
+    height: auto;
+    overflow: hidden;
+    position: absolute;
+    z-index: 1;
+
+    .sticky-nav-ul {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+
+    }
+
+    .sticky-nav-item {
+        flex-grow: 0;
+        color: $expend_fontColor;
+        font-size: $fontSize;
+        margin: 20px 0;
+        width: 220px;
+        padding: 0;
+        margin-right: 20px;
+        align-items: flex-start;
+        text-indent: 12px;
+
+        &.active {
+            color: $expand_activeColor;
+
+            &:before {
+                display: none;
+            }
+        }
+    }
+}
