@@ -22,6 +22,11 @@ $expand_activeColor:#eb3033;
 .sticky-nav-container{
     position: relative;
     z-index: 1000;
+    height: $navheight;
+    .sticky-nav-fixed{
+        width: 100%;
+        position: fixed;
+    }
 }
 .hide-stickynav {
     height: 0;

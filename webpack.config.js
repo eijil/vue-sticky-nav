@@ -2,15 +2,22 @@ var path = require('path')
 var webpack = require('webpack')
 const NODE_ENV = process.env.NODE_ENV;
 module.exports = {
-  entry: NODE_ENV == 'development' ? './src/main.js' : './src/compontents/vue-stickyNav/index.js',
+  entry:'./src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    filename: 'vue-stickyNav.js',
-    library: 'vue-stickyNav', // 指定的就是你使用require时的模块名
-    libraryTarget: 'umd', // 指定输出格式
-    umdNamedDefine: true // 会对 UMD 的构建过程中的 AMD 模块进行命名。否则就使用匿名的 define
+    filename: 'build.js',
+   
   },
+  // entry: NODE_ENV == 'development' ? './src/main.js' : './src/compontents/vue-stickyNav/index.js',
+  // output: {
+  //   path: path.resolve(__dirname, './dist'),
+  //   publicPath: '/dist/',
+  //   filename: 'vue-sticky-nav.js',
+  //   library: 'vue-sticky-nav', // 指定的就是你使用require时的模块名
+  //   libraryTarget: 'umd', // 指定输出格式
+  //   umdNamedDefine: true // 会对 UMD 的构建过程中的 AMD 模块进行命名。否则就使用匿名的 define
+  // },
   module: {
     rules: [
       {
@@ -74,7 +81,7 @@ if (process.env.NODE_ENV === 'production') {
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
+      sourceMap: false,
       compress: {
         warnings: false
       }

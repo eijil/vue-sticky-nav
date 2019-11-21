@@ -1,9 +1,12 @@
 <template>
-  <div 
-    class="sticky-nav-container" 
-    :class="{'hide-stickynav': (stickyOptions.scrollShow && !showNav)}" 
-    v-sticky="stickyOptions">
-    <div>
+  <div
+    class="sticky-nav-container"
+    :class="{'hide-stickynav': (stickyOptions.scrollShow && !visable)}"
+  >
+    <div
+      :class="{'sticky-nav-fixed':sticky && !options.disabled}"
+      :style="`top:${stickyOptions.stickyTop}px;z-index:${stickyOptions.zIndex};`"
+    >
       <span
         v-if="stickyOptions.showButton"
         class="stickyNav-expand"
@@ -46,30 +49,30 @@
 </template>
 
 <script>
-import { throttle } from "./utils.js";
+import {throttle} from "./throttle.js";
 import TWEEN from "@tweenjs/tween.js";
 const DEFAULT_OPTIONS = {
-        zIndex: 1000,
-        stickyTop: -1,
-        threshold: 0,
-        disabled:false,
-        //是否显示展开按钮
-        showButton: false,
-        //导航滚动是否使用动画
-        scrollAnimate: true,
-        //是否滚动到楼层才展示，默认false
-        scrollShow: false
- }
+  zIndex: 1000,
+  stickyTop: 0,
+  threshold: 0,
+  disabled: false,
+  //是否显示展开按钮
+  showButton: false,
+  //导航滚动是否使用动画
+  scrollAnimate: true,
+  //是否滚动到楼层才展示，默认false
+  scrollShow: false
+};
 export default {
-  name:'vue-stickynav',
   data() {
     return {
       navs: [],
       activeIndex: 0,
       isShowAll: false,
       translateX: 0,
-      showNav: false,
-      stickyOptions:{}
+      visable: false,
+      sticky: false,
+      stickyOptions: {}
     };
   },
   props: {
@@ -105,7 +108,6 @@ export default {
     }
   },
   computed: {
-   
     sections() {
       if (this.stickyOptions.sectionSelector) {
         return document.getElementsByClassName(
@@ -124,14 +126,12 @@ export default {
     }
   },
   mounted() {
-    //if (this.sections.length) {
     this.stickyOptions.threshold =
       this.stickyOptions.threshold +
       this.stickyNav.offsetHeight +
       this.stickyOptions.stickyTop;
 
-    window.addEventListener("scroll", this.scrollHandle, 500);
-    //}
+    window.addEventListener("scroll", throttle(this.scrollHandle, 100));
 
     if (this.stickyOptions.showButton) {
       this.insertOverlay();
@@ -152,8 +152,15 @@ export default {
           requestAnimationFrame(animate);
         }
       }
-      new TWEEN.Tween({ number: startValue })
-        .to({ number: endValue }, 100)
+      new TWEEN.Tween({
+        number: startValue
+      })
+        .to(
+          {
+            number: endValue
+          },
+          100
+        )
         .onUpdate(tween => {
           this.scrollView.scrollLeft = -tween.number;
         })
@@ -180,25 +187,29 @@ export default {
     },
     scrollHandle() {
       let scrollTop = window.scrollY;
+      const navOffsetTop = this.getScrollTopElement(this.$el);
       //是否滚动到楼层才显示导航
       if (this.stickyOptions.scrollShow) {
-        let navOffsetTop = this.getScrollTopElement(this.stickyNav);
         if (scrollTop >= navOffsetTop) {
-          this.showNav = true;
-        }else{
-          this.showNav = false;
+          this.visable = true;
+        } else {
+          this.visable = false;
         }
       }
-      if (this.sections.length && !this.options.disabled) {
-        if (scrollTop < this.getScrollTopElement(this.sections[0])) {
+      if (this.sections.length) {
+        if (scrollTop < navOffsetTop) {
           this.activeIndex = 0;
         }
         //超过最后一个停止吸顶
-        let lastSection =  this.sections[this.sections.length-1];
-        if(scrollTop > this.getScrollTopElement(lastSection) + lastSection.offsetHeight ){
-          this.stickyOptions.disabled = true;
-        }else{
-          this.stickyOptions.disabled = false;
+        let lastSection = this.sections[this.sections.length - 1];
+        if (
+          scrollTop >
+            this.getScrollTopElement(lastSection) + lastSection.offsetHeight ||
+          scrollTop < navOffsetTop
+        ) {
+          this.sticky = false;
+        } else {
+          this.sticky = true;
         }
       }
       for (let i = 0; i < this.sections.length; i++) {
@@ -211,7 +222,6 @@ export default {
           this.activeIndex = i;
         }
       }
-     
     },
     //导航栏移动
     navto(index) {
@@ -273,6 +283,7 @@ export default {
   }
 };
 </script>
+
 <style lang="scss">
 @import "./css/default.scss";
 </style>

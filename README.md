@@ -1,6 +1,7 @@
-### 吸顶导航 StickyNav 
+### Vue吸顶导航组件 StickyNav 
 
-> 用于移动端的吸顶导航组件，兼容所有主流机型，无bug
+> StickNav会在页面到达导航条位置的时候吸顶，超过父容器高度后恢复
+> 用于移动端的吸顶导航组件，兼容所有主流机型
 
 ### 安装
 
@@ -24,7 +25,7 @@ import {StickyNav} from 'vue-sticky-nav'
     <!--custom contents-->
 </div>
 ```
-StickNav会在页面到达导航条位置的时候吸顶，超过父容器高度后恢复
+
 
 ### 参数
 
