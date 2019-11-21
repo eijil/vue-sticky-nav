@@ -4,6 +4,10 @@ StickyNav会在页面到达导航条位置的时候吸顶，超过父容器高�
 
 用于移动端的吸顶导航组件，兼容所有主流机型
 
+### DEMOS
+
+[demo](https://eijil.github.io/vue-sticky-nav/)
+
 ### 安装
 
 ```
@@ -13,7 +17,7 @@ StickyNav会在页面到达导航条位置的时候吸顶，超过父容器高�
 
 ### 使用
 
-``` javascript{2}
+``` javascript
 
 //全局安装
 import StickyNav from 'vue-sticky-nav' 
@@ -31,7 +35,7 @@ import {StickyNav} from 'vue-sticky-nav'
 ### 参数
 
 
-``` js{2}
+``` js
     { 
         navs:['aa','bb','<a>cc</a>'], 
         selectionSelecotr:'sections', 
@@ -60,7 +64,7 @@ import {StickyNav} from 'vue-sticky-nav'
 
 ### 方法 
 
-``` js{2-3}
+``` js
     <StickyNav :options="stickyOptions" 
                 @changed="onchange" 
                 @expand="expand"/>
@@ -104,5 +108,4 @@ methods:{
 
 展开全部分类后添加`showAll` 样式
 
-默认样式使用px 
 :::
