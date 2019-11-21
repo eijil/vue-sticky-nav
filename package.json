@@ -1,7 +1,7 @@
 {
   "name": "vue-sticky-nav",
   "description": "vue compontents",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "author": "jiel1988 <191754186@qq.com>",
   "license": "MIT",
   "private": false,
@@ -12,15 +12,23 @@
   },
   "dependencies": {
     "@tweenjs/tween.js": "^18.3.2",
-    "randomcolor": "^0.5.4",
-    "vue": "^2.5.11",
-    "vue-randomcolor": "^1.0.4",
-    "vue-sticky-nav": "^1.0.7"
+    "vue": "^2.5.11"
   },
   "browserslist": [
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eijil/vue-sticky-nav"
+  },
+  "keywords": [
+    "vue-component",
+    "Vue",
+    "sticky",
+    "stickyNav",
+    "sticky-nav"
   ],
   "postcss": {
     "plugins": {
@@ -44,6 +52,8 @@
     "vue-loader": "^13.0.5",
     "vue-template-compiler": "^2.4.4",
     "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.9.1"
+    "webpack-dev-server": "^2.9.1",
+    "vue-randomcolor": "^1.0.4",
+    "randomcolor": "^0.5.4"
   }
 }

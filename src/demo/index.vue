@@ -35,20 +35,12 @@
     <div
         class="section _h1000"
         style="background:#005470">section6</div>
-
+     <div class="section _h1000" :style="`background:${randomColor()}`" v-for="(item,i) in addsections" :key="i">{{item}}</div>
     <div
-        style="height:3000px;background:#FF9999"
+        style="height:3000px;background:#ccc"
         class="footer">FOOTER</div>
-    <div class="demo-control">
-        <div>
-            <input type="text" placeholder="导航名称"></input><a>确定</a>
-        </div>
-        <div>
-            <input type="checkbox" v-model="stickyOptions.scrollAnimate">scrollAnimate</input>
-        </div>
-         <div>
-            <input type="checkbox" v-model="stickyOptions.showButton">showButton</input>
-        </div>
+    <div class="demo-control" @click="dynamicsAdd">
+      添加一个楼层
     </div>
 </div>
 </template>
@@ -79,7 +71,7 @@ export default {
                 scrollShow: false
             },
             addsections: [],
-            addTitle: '',
+           
         };
     },
     methods: {
@@ -90,15 +82,16 @@ export default {
             console.log(state);
         },
         dynamicsAdd() {
-            this.stickyOptions.navs.push("test");
-            this.addsections.push("test");
+            let index = this.stickyOptions.navs.length +1;
+            this.stickyOptions.navs.push("nav"+index);
+            this.addsections.push("sections"+index);
         },
         randomColor() {
             return this.$randomColor();
         }
     },
     mounted() {
-        console.log(this.$refs.StickyNav.stickyOptions.scrollAnimate)
+        
     },
 
 };
@@ -136,13 +129,19 @@ div {
 }
 
 .demo-control {
-    background: #fff;
-    padding: 20px;
+   
+    padding: 30px 20px;
     position: fixed;
     bottom: 50px;
     right: 50px;
     font-size: 20px;
-    color: #999;
+    background: #27AE60;
+	font-weight: bold;
+	color: white;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
+	
     input {
         vertical-align: middle;
     }
