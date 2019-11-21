@@ -37,8 +37,8 @@
         style="background:#005470">section6</div>
      <div class="section _h1000" :style="`background:${randomColor()}`" v-for="(item,i) in addsections" :key="i">{{item}}</div>
     <div
-        style="height:3000px;background:#ccc"
-        class="footer">FOOTER</div>
+        style="background:#ccc"
+        class="footer _h1000">FOOTER</div>
     <div class="demo-control" @click="dynamicsAdd">
       添加一个楼层
     </div>
@@ -87,7 +87,7 @@ export default {
             this.addsections.push("sections"+index);
         },
         randomColor() {
-            return this.$randomColor();
+            return '#'+Math.random().toString(16).slice(2,8);
         }
     },
     mounted() {
