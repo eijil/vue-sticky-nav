@@ -2,10 +2,11 @@ var path = require('path')
 var webpack = require('webpack')
 const NODE_ENV = process.env.NODE_ENV;
 
+const isDev =true;
 
 module.exports = {
-  entry:true ? './src/main.js' : './src/compontents/vue-stickyNav/index.js',
-  output: true ? {
+  entry: isDev ? './src/main.js' : './src/compontents/vue-stickyNav/index.js',
+  output: isDev ? {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
     filename: 'build.js',
@@ -16,7 +17,7 @@ module.exports = {
       library: 'vue-sticky-nav', // 指定的就是你使用require时的模块名
       libraryTarget: 'umd', // 指定输出格式
       umdNamedDefine: true // 会对 UMD 的构建过程中的 AMD 模块进行命名。否则就使用匿名的 define
-  } , 
+    },
   module: {
     rules: [
       {
@@ -25,7 +26,7 @@ module.exports = {
           'vue-style-loader',
           'css-loader'
         ],
-      },      {
+      }, {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
@@ -48,8 +49,8 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use:['sass-loader'],
-       
+        use: ['sass-loader'],
+
       },
     ]
   },
