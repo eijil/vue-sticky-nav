@@ -4,8 +4,8 @@ const NODE_ENV = process.env.NODE_ENV;
 
 
 module.exports = {
-  entry: NODE_ENV == 'development' ? './src/main.js' : './src/compontents/vue-stickyNav/index.js',
-  output: NODE_ENV == 'development' ? {
+  entry:true == 'development' ? './src/main.js' : './src/compontents/vue-stickyNav/index.js',
+  output: true ? {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
     filename: 'build.js',

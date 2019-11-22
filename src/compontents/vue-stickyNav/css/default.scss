@@ -54,13 +54,8 @@ $expand_activeColor:#eb3033;
 
     .sticky-nav-item {
         position: relative;
-        // display: flex;
         display: inline-block;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
         text-decoration: none;
-        flex-grow: 1;
         color: $fontColor;
         padding: 0 15px;
         padding-left: 30px;
