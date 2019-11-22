@@ -2,7 +2,7 @@ var path = require('path')
 var webpack = require('webpack')
 const NODE_ENV = process.env.NODE_ENV;
 
-const isDev =true;
+const isDev = NODE_ENV == 'development';
 
 module.exports = {
   entry: isDev ? './src/main.js' : './src/compontents/vue-stickyNav/index.js',
