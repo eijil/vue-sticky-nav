@@ -1,4 +1,4 @@
-### Vue吸顶导航组件 StickyNav 
+### h5吸顶导航组件 
 
 StickyNav会在页面到达导航条位置的时候吸顶，超过父容器高度后恢复
 
@@ -10,7 +10,7 @@ StickyNav会在页面到达导航条位置的时候吸顶，超过父容器高�
 
 ### 安装
 
-```
+``` js
  yarn add vue-sticky-nav
 
 ```
@@ -88,13 +88,20 @@ methods:{
 
 ``` html
     <div class="sticky-nav-container showAll">
-         <!--设置了showButton后显示-->
+         <!--设置了showButton后显示展开按钮-->
         <span class="stickyNav-expand" >
             <span class="icon-arrow"></span>
         </span>
         <div class="all-topbar">请选择分类</div>
         <!-- end-->
         <div class="sticky-nav">
+            <ul>
+                <li class="sticky-nav-item active"></li>
+                <li class="sticky-nav-item"></li>
+            </ul>
+        </div>
+        <!--展开后的-->
+        <div class="sticky-nav-expand-panel">
             <ul>
                 <li class="sticky-nav-item active"></li>
                 <li class="sticky-nav-item"></li>

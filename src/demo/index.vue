@@ -42,6 +42,7 @@
     <div class="demo-control" @click="dynamicsAdd">
       添加一个楼层
     </div>
+    
 </div>
 </template>
 
@@ -145,5 +146,18 @@ div {
     input {
         vertical-align: middle;
     }
+}
+.togit{
+     padding: 30px 20px;
+    position: fixed;
+    bottom: 50px;
+    left: 50px;
+    font-size: 20px;
+    background: #fff;
+	font-weight: bold;
+	color: #27AE60;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
 }
 </style>
