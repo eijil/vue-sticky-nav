@@ -1,30 +1,33 @@
-### h5吸顶导航组件 
+# vue-sticky-nav
 
 StickyNav会在页面到达导航条位置的时候吸顶，超过父容器高度后恢复
 
-用于移动端的吸顶导航组件，兼容所有主流机型
+## Demo
 
-### DEMOS
+[Live demo](https://eijil.github.io/vue-sticky-nav/)
 
-[demo](https://eijil.github.io/vue-sticky-nav/)
+## install
 
-### 安装
+npm/yarn
 
 ``` js
  yarn add vue-sticky-nav
 
 ```
 
-### 使用
+## Usage
 
 ``` javascript
 
-//全局安装
+//global
 import StickyNav from 'vue-sticky-nav' 
 Vue.use(StickyNav)
-//or组件内使用
-import {StickyNav} from 'vue-sticky-nav'  
+```
+or:
 
+```js
+//compontents
+import {StickyNav} from 'vue-sticky-nav'  
 <div class="parent">
     <StickyNav :options="stickyOptions"/>
     <!--custom contents-->
@@ -32,7 +35,7 @@ import {StickyNav} from 'vue-sticky-nav'
 ```
 
 
-### 参数
+## Options
 
 
 ``` js
@@ -62,7 +65,7 @@ import {StickyNav} from 'vue-sticky-nav'
 * `threshold`: 到达内容之前多少像素则选中 默认0
 
 
-### 方法 
+## methods 
 
 ``` js
     <StickyNav :options="stickyOptions" 
@@ -82,9 +85,7 @@ methods:{
 }
 ```
 
-### HTML
-
-生成的html结构
+## HTML Structure 
 
 ``` html
     <div class="sticky-nav-container showAll">
@@ -110,7 +111,8 @@ methods:{
        
     </div>
 ```
-::: tip
+::: Tip
+
 当前选中会添加 `active` 样式
 
 展开全部分类后添加`showAll` 样式
