@@ -49,7 +49,7 @@
 <script>
 import {
     StickyNav
-} from "../compontents/vue-stickyNav";
+} from "../compontents/vue-sticky-nav";
 export default {
     name: "demo",
     components: {

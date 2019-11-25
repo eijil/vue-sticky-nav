@@ -1,7 +1,7 @@
 {
   "name": "vue-sticky-nav",
   "description": "A mobile friendly sticky nav compontents for Vue.js",
-  "version": "1.1.6",
+  "version": "1.1.9",
   "author": "jiel1988 <191754186@qq.com>",
   "license": "MIT",
   "private": false,
@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "@tweenjs/tween.js": "^18.3.2",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "vue-sticky-nav": "^1.1.9"
   },
   "browserslist": [
     "Android >= 4.4",
