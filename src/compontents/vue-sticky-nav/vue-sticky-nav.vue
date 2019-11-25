@@ -49,8 +49,11 @@
 </template>
 
 <script>
-import {throttle} from "./throttle.js";
+
+import assign from 'lodash/assign';
+import throttle from 'lodash/throttle';
 import TWEEN from "@tweenjs/tween.js";
+
 const DEFAULT_OPTIONS = {
   zIndex: 1000,
   stickyTop: 0,
@@ -81,7 +84,7 @@ export default {
     }
   },
   created() {
-    this.stickyOptions = Object.assign({}, DEFAULT_OPTIONS, this.options);
+    this.stickyOptions = assign({}, DEFAULT_OPTIONS, this.options);
     this.navs = this.stickyOptions.navs;
   },
   watch: {

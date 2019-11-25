@@ -4,7 +4,7 @@ StickyNav会在页面到达导航条位置的时候吸顶，超过父容器高�
 
 ## Demo
 
-[Live demo](https://eijil.github.io/vue-sticky-nav/)
+[Live demo](http://vue-sticky-nav.surge.sh)
 
 ## install
 
