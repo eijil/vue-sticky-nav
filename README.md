@@ -1,5 +1,9 @@
 # vue-sticky-nav
 
+[![NPM version](https://img.shields.io/npm/v/vue-sticky-nav)][downloads-url]
+[![NPM Downloads][downloads-image]][downloads-url]
+[![NPM license][license-image]]()
+
 StickyNav会在页面到达导航条位置的时候吸顶，超过父容器高度后恢复
 
 ## Demo
@@ -111,10 +115,10 @@ methods:{
        
     </div>
 ```
-::: Tip
+# License
 
-当前选中会添加 `active` 样式
+MIT
 
-展开全部分类后添加`showAll` 样式
-
-:::
+[downloads-image]: https://img.shields.io/npm/dm/vue-sticky-nav
+[downloads-url]: https://www.npmjs.com/package/vue-sticky-nav
+[license-image]:https://img.shields.io/npm/l/vue-sticky-nav
