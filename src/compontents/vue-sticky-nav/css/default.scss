@@ -16,7 +16,7 @@ $expand_activeColor:#eb3033;
     background: $fontColor;
     border-radius: 6px;
     position: absolute;
-    transition: all 0.4s;
+    transition: transform 0.4s;
     content: "";
 }
 .sticky-nav-container{
@@ -26,11 +26,16 @@ $expand_activeColor:#eb3033;
     .sticky-nav-fixed{
         width: 100%;
         position: fixed;
+        transition: transform .3s ease-out;
+    }
+    &.hide-up{
+        .sticky-nav-fixed{
+            transform: translateY(-100%);
+        }
     }
 }
 .hide-stickynav {
-    height: 0;
-    overflow: hidden;
+    visibility: hidden;
 }
 .sticky-nav {
 
@@ -54,8 +59,13 @@ $expand_activeColor:#eb3033;
 
     .sticky-nav-item {
         position: relative;
+        // display: flex;
         display: inline-block;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         text-decoration: none;
+        flex-grow: 1;
         color: $fontColor;
         padding: 0 15px;
         padding-left: 30px;

@@ -42,14 +42,20 @@
     <div class="demo-control" @click="dynamicsAdd">
       添加一个楼层
     </div>
-    
+    <div class="controller">
+   
+    <div></div>
+    </div>
 </div>
+
 </template>
 
 <script>
 import {
     StickyNav
-} from "../compontents/vue-sticky-nav";
+} from "vue-sticky-nav";
+import * as dat from 'dat.gui';
+const gui = new dat.GUI();
 export default {
     name: "demo",
     components: {
@@ -69,7 +75,11 @@ export default {
                 sectionSelector: "section",
                 showButton: true,
                 scrollAnimate: true,
-                scrollShow: false
+                scrollShow: false,
+                stickyTop:-1,
+                scrollDownHide:true,
+                disabled:false,
+                title:'请选择分类'
             },
             addsections: [],
            
@@ -92,7 +102,14 @@ export default {
         }
     },
     mounted() {
+        gui.add(this.stickyOptions,'title')
+        gui.add(this.stickyOptions,'scrollShow')
+        gui.add(this.stickyOptions,'scrollAnimate')
+        gui.add(this.stickyOptions,'scrollDownHide')
+        gui.add(this.stickyOptions,'stickyTop').min(-1).step(1)
+        gui.add(this.stickyOptions,'disabled')
         
+      
     },
 
 };
@@ -146,5 +163,10 @@ div {
     input {
         vertical-align: middle;
     }
+}
+.dg.ac{
+    top: 100px;
+    
+   
 }
 </style>

@@ -1,7 +1,10 @@
 <template>
   <div
     class="sticky-nav-container"
-    :class="{'hide-stickynav': (stickyOptions.scrollShow && !visable)}"
+    :style="stickyOptions.scrollShow?'height:0':''"
+    :class="[{
+      'hide-stickynav':(stickyOptions.scrollShow && !visable),
+      'hide-up':scrollHide}]"
   >
     <div
       :class="{'sticky-nav-fixed':sticky && !options.disabled}"
@@ -15,7 +18,7 @@
       >
         <span class="sticky-nav-arrow" :class="{'expand':isShowAll}"></span>
       </span>
-      <div v-if="isShowAll" class="sticky-nav-expand-topbar">请选择分类</div>
+      <div v-if="isShowAll" class="sticky-nav-expand-topbar">{{stickyOptions.title}}</div>
       <div class="sticky-nav" ref="stickyNav">
         <div class="scroll-view" ref="scollView">
           <ul class="sticky-nav-ul">
@@ -49,13 +52,11 @@
 </template>
 
 <script>
-
 import assign from 'lodash/assign';
 import throttle from 'lodash/throttle';
 import TWEEN from "@tweenjs/tween.js";
-
 const DEFAULT_OPTIONS = {
-  zIndex: 1000,
+  zIndex: 1001,
   stickyTop: 0,
   threshold: 0,
   disabled: false,
@@ -64,7 +65,10 @@ const DEFAULT_OPTIONS = {
   //导航滚动是否使用动画
   scrollAnimate: true,
   //是否滚动到楼层才展示，默认false
-  scrollShow: false
+  scrollShow: false,
+  //向下滚不显示
+  scrollDownHide: false,
+  title: "请选择分类"
 };
 export default {
   data() {
@@ -75,19 +79,30 @@ export default {
       translateX: 0,
       visable: false,
       sticky: false,
-      stickyOptions: {}
+      stickyOptions: {},
+      scrollTop: 0,
+      scrollHide: false, //滚动是否隐藏
+      scrollTimer: null, //滚动隐藏定时器,
+      isClickScroll: false
     };
   },
   props: {
     options: {
       type: Object
-    }
+    },
+  
   },
   created() {
-    this.stickyOptions = assign({}, DEFAULT_OPTIONS, this.options);
+    this.stickyOptions = Object.assign({}, DEFAULT_OPTIONS, this.options);
     this.navs = this.stickyOptions.navs;
   },
   watch: {
+    options:{
+      handler(value){
+        Object.assign(this.stickyOptions,value)
+      },
+      deep:true
+    },
     translateX(newValue, oldValue) {
       if (this.stickyOptions.scrollAnimate) {
         this.tween(oldValue, newValue);
@@ -96,11 +111,40 @@ export default {
       }
       //
     },
-    activeIndex(value) {
+    activeIndex(value, oldValue) {
       setTimeout(() => {
         this.navto(value);
       }, 0);
       this.$emit("changed", value);
+    },
+    scrollTop(value, oldValue) {
+      if (this.stickyOptions.scrollDownHide) {
+        if(this.isClickScroll){
+          setTimeout(() => {
+            this.isClickScroll = false
+          }, 10);
+        }
+        if (this.isClickScroll) return;
+        const navshowDelay = 2000;
+        const start = this.activeIndex > 0; //滑过楼层1才生效
+        //down
+        if (value > oldValue && start) {
+          this.scrollHide = true;
+          clearTimeout(this.scrollTimer);
+          this.scrollTimer = null;
+        } else {
+          this.scrollHide = false;
+        }
+        if (!this.scrollTimer) {
+          this.scrollTimer = setTimeout(() => {
+            this.scrollHide = false;
+            this.isClickScroll = false;
+          }, navshowDelay);
+        }
+      }
+    },
+    scrollHide(state) {
+      this.$emit("navState", state);
     },
     isShowAll(state) {
       this.$emit("expand", state);
@@ -147,6 +191,7 @@ export default {
       this.isShowAll = false;
       this.scrollTo(index);
       this.$emit("click", index);
+      this.isClickScroll = true;
     },
     //导航条动画
     tween(startValue, endValue) {
@@ -189,9 +234,14 @@ export default {
       return top;
     },
     scrollHandle() {
-      let scrollTop = window.scrollY;
+      if(this.stickyOptions.disabled){
+        return
+      }
+      let scrollTop = (this.scrollTop = window.scrollY);
+
       const navOffsetTop = this.getScrollTopElement(this.$el);
       //是否滚动到楼层才显示导航
+
       if (this.stickyOptions.scrollShow) {
         if (scrollTop >= navOffsetTop) {
           this.visable = true;
@@ -290,3 +340,4 @@ export default {
 <style lang="scss">
 @import "./css/default.scss";
 </style>
+

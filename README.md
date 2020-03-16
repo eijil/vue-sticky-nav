@@ -50,6 +50,7 @@ import {StickyNav} from 'vue-sticky-nav'
         scrollAnimate:true,
         scrollShow:false,
         disable:false,
+        scrollDownHide:false
         zIndex:1000,
         stickyTop:-1,
         threshold:0,
@@ -64,6 +65,7 @@ import {StickyNav} from 'vue-sticky-nav'
 * `disabled` : 是否禁用吸顶，默认是false
 * `scrollAnimate` : 导航滚动是否开启动画，默认是true
 * `scrollShow`: 是否滚动到楼层才展示，默认false
+* `scrollDownHide`:  是否向下滚动时隐藏，向上和静止时展示展示 默认false
 * `zIndex` : 层级，默认1000
 * `stickyTop`: 吸顶距离顶部的位置，默认-1
 * `threshold`: 到达内容之前多少像素则选中 默认0
