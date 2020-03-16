@@ -93,13 +93,13 @@ export default {
   
   },
   created() {
-    this.stickyOptions = Object.assign({}, DEFAULT_OPTIONS, this.options);
+    this.stickyOptions = assign({}, DEFAULT_OPTIONS, this.options);
     this.navs = this.stickyOptions.navs;
   },
   watch: {
     options:{
       handler(value){
-        Object.assign(this.stickyOptions,value)
+        assign(this.stickyOptions,value)
       },
       deep:true
     },
