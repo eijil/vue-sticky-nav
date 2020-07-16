@@ -1,7 +1,7 @@
 {
   "name": "vue-sticky-nav",
   "description": "A mobile friendly sticky nav compontents for Vue.js",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "author": "jiel1988 <191754186@qq.com>",
   "license": "MIT",
   "private": false,

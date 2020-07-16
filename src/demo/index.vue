@@ -53,7 +53,7 @@
 <script>
 import {
     StickyNav
-} from "vue-sticky-nav";
+} from "../compontents/vue-sticky-nav";
 import * as dat from 'dat.gui';
 const gui = new dat.GUI();
 export default {

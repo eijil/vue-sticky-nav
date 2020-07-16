@@ -113,7 +113,7 @@ export default {
     },
     activeIndex(value, oldValue) {
       setTimeout(() => {
-        this.navto(value);
+        this.center(value);
       }, 0);
       this.$emit("changed", value);
     },
@@ -277,39 +277,29 @@ export default {
       }
     },
     //导航栏移动
-    navto(index) {
+    center(index) {
       const activeItem = this.$refs.navitem[index];
       const offsetLeft = activeItem.offsetLeft;
+      const offsetWidth = activeItem.offsetWidth;
       const touchWidth = this.stickyNav.offsetWidth;
       const buttonWidth = this.stickyOptions.showButton ? this.buttonWidth : 0;
       const scrollWidth =
         this.scrollView.scrollWidth - this.stickyNav.offsetWidth + buttonWidth;
-
       if (scrollWidth == 0) {
         return;
       }
-      const half = (touchWidth - activeItem.offsetWidth) / 2;
-      let changeX = 0;
-      const absTransX = Math.abs(this.translateX);
-
-      if (offsetLeft <= absTransX + half) {
-        // item偏左，需要往右移
-        let pageX = offsetLeft + this.translateX;
-        changeX = half - pageX;
-      } else {
-        // item偏右，需要往左移
-        changeX = -(offsetLeft - absTransX - half);
-      }
-      let lastX = changeX + this.translateX;
-
+      const half = (touchWidth - offsetWidth) / 2;
+      
+      let scrollLeft = half - offsetLeft ;
+      
       // 两种边界情况
-      lastX > 0 && (lastX = 0);
-      lastX < -scrollWidth && (lastX = -scrollWidth);
-      this.translateX = lastX;
-
-      // this.scrollView.scrollLeft = Math.abs(this.translateX)
+      scrollLeft > 0 && (scrollLeft = 0);
+      scrollLeft < -scrollWidth && (scrollLeft = -scrollWidth);
+      
+      this.translateX = scrollLeft;
+     
     },
-
+    
     //展开分类
     expand() {
       this.isShowAll = this.isShowAll ? false : true;
