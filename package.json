@@ -50,7 +50,7 @@
     "css-loader": "^0.28.7",
     "dat.gui": "^0.7.6",
     "file-loader": "^1.1.4",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "postcss-plugin-pxtoviewport": "^0.0.6",
     "sass-loader": "^7.3.1",
     "vue-loader": "^13.0.5",
